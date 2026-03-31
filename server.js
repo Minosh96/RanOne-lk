@@ -32,6 +32,6 @@ app.use('/api', apiRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🌟 Glitter.lk is running at http://localhost:${PORT}`);
+  console.log(`🌟 RanOne is running at http://localhost:${PORT}`);
   console.log(`🔧 Admin panel at http://localhost:${PORT}/admin`);
 });

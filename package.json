@@ -1,7 +1,7 @@
 {
-  "name": "glitter-lk",
+  "name": "ran-one",
   "version": "1.0.0",
-  "description": "Glitter.lk - Online Ornament Store",
+  "description": "RanOne - Online Ornament Store",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
