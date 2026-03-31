@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
   } catch (error) {
     res.render('public/home', { featuredProducts: [], newArrivals: [] });
   }
-});pwd
+});
 
 
 // ---- SHOP PAGE (All Products) ----
