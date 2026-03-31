@@ -6,7 +6,7 @@ const cloudinary = require('cloudinary').v2;
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const Product = require('../models/Product');
+const Product = require('../models/product');
 const Admin = require('../models/Admin');
 const { requireAdmin } = require('../middleware/auth');
 
