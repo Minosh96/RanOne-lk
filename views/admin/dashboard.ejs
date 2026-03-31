@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Glitter.lk Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>✨ Glitter.lk</h2>
+        <p>Admin Panel</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/admin/dashboard" class="active"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="/admin/products"><i class="fas fa-box"></i> All Products</a>
+        <a href="/admin/products/add"><i class="fas fa-plus"></i> Add Product</a>
+        <a href="/" target="_blank"><i class="fas fa-eye"></i> View Site</a>
+        <a href="/admin/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="content-header">
+        <h1>Dashboard</h1>
+        <a href="/admin/products/add" class="btn btn-primary"><i class="fas fa-plus"></i> Add Product</a>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #e8f5e9;"><i class="fas fa-box" style="color: #4caf50;"></i></div>
+          <div class="stat-info">
+            <h3><%= totalProducts %></h3>
+            <p>Total Products</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #e3f2fd;"><i class="fas fa-check-circle" style="color: #2196f3;"></i></div>
+          <div class="stat-info">
+            <h3><%= inStockProducts %></h3>
+            <p>In Stock</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background: #fff3e0;"><i class="fas fa-star" style="color: #ff9800;"></i></div>
+          <div class="stat-info">
+            <h3><%= featuredProducts %></h3>
+            <p>Featured</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Products -->
+      <div class="card">
+        <h2>Recent Products</h2>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% recentProducts.forEach(function(product) { %>
+              <tr>
+                <td>
+                  <% if (product.images && product.images.length > 0) { %>
+                    <img src="<%= product.images[0] %>" class="table-image" alt="">
+                  <% } else { %>
+                    <span>No image</span>
+                  <% } %>
+                </td>
+                <td><strong><%= product.name %></strong></td>
+                <td><%= product.category %></td>
+                <td>Rs. <%= product.price.toLocaleString() %></td>
+                <td>
+                  <span class="status-badge <%= product.inStock ? 'status-active' : 'status-inactive' %>">
+                    <%= product.inStock ? 'In Stock' : 'Out of Stock' %>
+                  </span>
+                </td>
+                <td>
+                  <a href="/admin/products/edit/<%= product._id %>" class="btn btn-small btn-edit">Edit</a>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

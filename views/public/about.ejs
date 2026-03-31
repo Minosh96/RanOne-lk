@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= product.name %> - Glitter.lk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Glitter<span class="logo-dot">.lk</span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/shop">Shop</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="product-detail-container">
+    <div class="breadcrumb">
+      <a href="/">Home</a> → <a href="/shop">Shop</a> → <a href="/shop?category=<%= product.category %>"><%= product.category %></a> → <%= product.name %>
+    </div>
+
+    <div class="product-detail">
+      <!-- Images -->
+      <div class="product-gallery">
+        <div class="main-image">
+          <% if (product.images && product.images.length > 0) { %>
+            <img src="<%= product.images[0] %>" alt="<%= product.name %>" id="mainImage">
+          <% } else { %>
+            <div class="no-image large">✨</div>
+          <% } %>
+        </div>
+        <% if (product.images && product.images.length > 1) { %>
+          <div class="thumbnail-images">
+            <% product.images.forEach(function(img, index) { %>
+              <img src="<%= img %>" alt="<%= product.name %>" 
+                   onclick="document.getElementById('mainImage').src='<%= img %>'"
+                   class="thumbnail <%= index === 0 ? 'active' : '' %>">
+            <% }); %>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-detail-info">
+        <h1><%= product.name %></h1>
+        <p class="product-category-badge"><%= product.category %></p>
+        
+        <div class="product-detail-price">
+          <% if (product.salePrice) { %>
+            <span class="original-price large">Rs. <%= product.price.toLocaleString() %></span>
+            <span class="sale-price large">Rs. <%= product.salePrice.toLocaleString() %></span>
+            <span class="discount-badge">
+              Save <%= Math.round((1 - product.salePrice / product.price) * 100) %>%
+            </span>
+          <% } else { %>
+            <span class="current-price large">Rs. <%= product.price.toLocaleString() %></span>
+          <% } %>
+        </div>
+
+        <div class="stock-status">
+          <% if (product.inStock) { %>
+            <span class="in-stock">✅ In Stock</span>
+            <% if (product.quantity > 0) { %>
+              <span class="quantity-left">(<%= product.quantity %> left)</span>
+            <% } %>
+          <% } else { %>
+            <span class="out-of-stock">❌ Out of Stock</span>
+          <% } %>
+        </div>
+
+        <div class="product-description">
+          <h3>Description</h3>
+          <p><%= product.description %></p>
+        </div>
+
+        <% if (product.tags && product.tags.length > 0) { %>
+          <div class="product-tags">
+            <% product.tags.forEach(function(tag) { %>
+              <span class="tag">#<%= tag %></span>
+            <% }); %>
+          </div>
+        <% } %>
+
+        <div class="order-buttons">
+          <a href="https://wa.me/94XXXXXXXXX?text=Hi! I'd like to order: %0A%0A*<%= encodeURIComponent(product.name) %>*%0APrice: Rs. <%= product.salePrice || product.price %>%0A%0APlease confirm availability." 
+             class="btn btn-whatsapp btn-large" target="_blank">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </a>
+          <a href="tel:+94XXXXXXXXX" class="btn btn-call btn-large">
+            <i class="fas fa-phone"></i> Call to Order
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <% if (relatedProducts.length > 0) { %>
+      <section class="section">
+        <h2 class="section-title">You May Also Like</h2>
+        <div class="products-grid">
+          <% relatedProducts.forEach(function(rp) { %>
+            <div class="product-card">
+              <a href="/product/<%= rp._id %>">
+                <div class="product-image">
+                  <% if (rp.images && rp.images.length > 0) { %>
+                    <img src="<%= rp.images[0] %>" alt="<%= rp.name %>">
+                  <% } else { %>
+                    <div class="no-image">✨</div>
+                  <% } %>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name"><%= rp.name %></h3>
+                  <div class="product-price">
+                    <span class="current-price">Rs. <%= (rp.salePrice || rp.price).toLocaleString() %></span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          <% }); %>
+        </div>
+      </section>
+    <% } %>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>&copy; 2024 Glitter.lk - All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

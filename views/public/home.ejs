@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glitter.lk - Beautiful Ornaments Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">RanOne<span class="logo-dot"></span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="/" class="active">Home</a>
+        <a href="/shop">Shop</a>
+        <a href="/shop?category=necklaces">Necklaces</a>
+        <a href="/shop?category=earrings">Earrings</a>
+        <a href="/shop?category=bracelets">Bracelets</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="nav-icons">
+        <a href="/shop" class="nav-icon"><i class="fas fa-search"></i></a>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Sparkle with <span class="highlight">RanOne</span></h1>
+      <p class="hero-subtitle">Discover beautiful handcrafted ornaments that make you shine</p>
+      <a href="/shop" class="btn btn-primary">Shop Now ✨</a>
+    </div>
+    <div class="hero-sparkles">
+      <span class="sparkle">✦</span>
+      <span class="sparkle">✧</span>
+      <span class="sparkle">✦</span>
+      <span class="sparkle">✧</span>
+      <span class="sparkle">✦</span>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section categories-section">
+    <h2 class="section-title">Shop by Category</h2>
+    <div class="categories-grid">
+      <a href="/shop?category=necklaces" class="category-card">
+        <div class="category-icon">📿</div>
+        <h3>Necklaces</h3>
+      </a>
+      <a href="/shop?category=earrings" class="category-card">
+        <div class="category-icon">💎</div>
+        <h3>Earrings</h3>
+      </a>
+      <a href="/shop?category=bracelets" class="category-card">
+        <div class="category-icon">📿</div>
+        <h3>Bracelets</h3>
+      </a>
+      <a href="/shop?category=rings" class="category-card">
+        <div class="category-icon">💍</div>
+        <h3>Rings</h3>
+      </a>
+      <a href="/shop?category=anklets" class="category-card">
+        <div class="category-icon">⭐</div>
+        <h3>Anklets</h3>
+      </a>
+      <a href="/shop?category=hair-accessories" class="category-card">
+        <div class="category-icon">🌸</div>
+        <h3>Hair Accessories</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <% if (featuredProducts.length > 0) { %>
+  <section class="section">
+    <h2 class="section-title">✨ Featured Products</h2>
+    <div class="products-grid">
+      <% featuredProducts.forEach(function(product) { %>
+        <div class="product-card">
+          <a href="/product/<%= product._id %>">
+            <div class="product-image">
+              <% if (product.images && product.images.length > 0) { %>
+                <img src="<%= product.images[0] %>" alt="<%= product.name %>">
+              <% } else { %>
+                <div class="no-image">✨</div>
+              <% } %>
+              <% if (product.salePrice) { %>
+                <span class="sale-badge">SALE</span>
+              <% } %>
+              <% if (product.featured) { %>
+                <span class="featured-badge">⭐ Featured</span>
+              <% } %>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name"><%= product.name %></h3>
+              <p class="product-category"><%= product.category %></p>
+              <div class="product-price">
+                <% if (product.salePrice) { %>
+                  <span class="original-price">Rs. <%= product.price.toLocaleString() %></span>
+                  <span class="sale-price">Rs. <%= product.salePrice.toLocaleString() %></span>
+                <% } else { %>
+                  <span class="current-price">Rs. <%= product.price.toLocaleString() %></span>
+                <% } %>
+              </div>
+            </div>
+          </a>
+          <a href="https://wa.me/94XXXXXXXXX?text=Hi! I'm interested in <%= encodeURIComponent(product.name) %> (Rs. <%= product.salePrice || product.price %>)" 
+             class="btn btn-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </a>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+  <% } %>
+
+  <!-- NEW ARRIVALS -->
+  <% if (newArrivals.length > 0) { %>
+  <section class="section section-grey">
+    <h2 class="section-title">🆕 New Arrivals</h2>
+    <div class="products-grid">
+      <% newArrivals.forEach(function(product) { %>
+        <div class="product-card">
+          <a href="/product/<%= product._id %>">
+            <div class="product-image">
+              <% if (product.images && product.images.length > 0) { %>
+                <img src="<%= product.images[0] %>" alt="<%= product.name %>">
+              <% } else { %>
+                <div class="no-image">✨</div>
+              <% } %>
+              <% if (product.salePrice) { %>
+                <span class="sale-badge">SALE</span>
+              <% } %>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name"><%= product.name %></h3>
+              <p class="product-category"><%= product.category %></p>
+              <div class="product-price">
+                <% if (product.salePrice) { %>
+                  <span class="original-price">Rs. <%= product.price.toLocaleString() %></span>
+                  <span class="sale-price">Rs. <%= product.salePrice.toLocaleString() %></span>
+                <% } else { %>
+                  <span class="current-price">Rs. <%= product.price.toLocaleString() %></span>
+                <% } %>
+              </div>
+            </div>
+          </a>
+          <a href="https://wa.me/94XXXXXXXXX?text=Hi! I'm interested in <%= encodeURIComponent(product.name) %>" 
+             class="btn btn-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </a>
+        </div>
+      <% }); %>
+    </div>
+    <div class="text-center" style="margin-top: 2rem;">
+      <a href="/shop" class="btn btn-primary">View All Products →</a>
+    </div>
+  </section>
+  <% } %>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section features-section">
+    <h2 class="section-title">Why Choose RanOne?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🚚</div>
+        <h3>Island-wide Delivery</h3>
+        <p>We deliver to every corner of Sri Lanka</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💎</div>
+        <h3>Quality Products</h3>
+        <p>Handpicked beautiful ornaments</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Best Prices</h3>
+        <p>Affordable luxury for everyone</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Easy Ordering</h3>
+        <p>Order via WhatsApp instantly</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>✨ Glitter.lk</h3>
+        <p>Your favorite online ornament store in Sri Lanka</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="/shop">Shop</a>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h3>Categories</h3>
+        <a href="/shop?category=necklaces">Necklaces</a>
+        <a href="/shop?category=earrings">Earrings</a>
+        <a href="/shop?category=bracelets">Bracelets</a>
+        <a href="/shop?category=rings">Rings</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>📱 +94 XX XXX XXXX</p>
+        <p>📧 info@glitter.lk</p>
+        <p>📍 Sri Lanka</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Glitter.lk - All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

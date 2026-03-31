@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Glitter.lk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">✨</span>
+        <span class="logo-text">Glitter<span class="logo-dot">.lk</span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/shop">Shop</a>
+        <a href="/about">About</a>
+        <a href="/contact" class="active">Contact</a>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you! 💌</p>
+  </div>
+
+  <div class="contact-content">
+    <div class="contact-cards">
+      <div class="contact-card">
+        <i class="fab fa-whatsapp"></i>
+        <h3>WhatsApp</h3>
+        <p>+94 XX XXX XXXX</p>
+        <a href="https://wa.me/94XXXXXXXXX" class="btn btn-whatsapp" target="_blank">Chat Now</a>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-phone"></i>
+        <h3>Call Us</h3>
+        <p>+94 XX XXX XXXX</p>
+        <a href="tel:+94XXXXXXXXX" class="btn btn-primary">Call Now</a>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <h3>Email</h3>
+        <p>info@glitter.lk</p>
+        <a href="mailto:info@glitter.lk" class="btn btn-primary">Send Email</a>
+      </div>
+      <div class="contact-card">
+        <i class="fab fa-instagram"></i>
+        <h3>Instagram</h3>
+        <p>@glitter.lk</p>
+        <a href="#" class="btn btn-primary">Follow Us</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>&copy; 2024 Glitter.lk - All Rights Reserved</p>
+    </div>
+  </footer>
+  <script>function toggleMenu(){document.getElementById('navLinks').classList.toggle('active');}</script>
+</body>
+</html>
